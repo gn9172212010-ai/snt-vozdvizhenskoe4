@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 
 import path from "node:path";
 import { listNews } from "../../utils/autoContent.js";
+import { withBase } from "../../utils/url.js";
 
 const newsDir = path.join(process.cwd(), "src", "content", "news");
 const news = listNews(newsDir);
@@ -63,7 +64,7 @@ const news = listNews(newsDir);
 
                     <a
                         class="button"
-                        href="/news">
+                        href={withBase("/news")}>
 
                         Все новости →
 

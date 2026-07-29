@@ -255,14 +255,11 @@ header {
   align-items: center;
   text-align: center;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/hero.jpeg') center/cover no-repeat;
+  background-color: #2f6b2f;
 }
 
-/* Баннер для страницы "О нас" */
+/* Баннер для страницы "О нас" (фон подставляется динамически из MainLayout) */
 .hero.hero-about {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/about.jpeg') center/cover no-repeat;
 }
 
 .hero-logo {
@@ -336,38 +333,24 @@ header {
 }
 
 .page-hero-about {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/about.jpeg') center/cover no-repeat;
 }
 
 .page-hero-documents {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-documents.jpg') center/cover no-repeat;
 }
 
 .page-hero-payments {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-payments.jpg') center/cover no-repeat;
 }
 
 .page-hero-gallery {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-gallery.jpg') center/cover no-repeat;
 }
 
 .page-hero-news {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-news.jpg') center/cover no-repeat;
 }
 
 .page-hero-calendar {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-calendar.jpg') center/cover no-repeat;
 }
 
 .page-hero-contacts {
-  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url('/images/page-contacts.jpg') center/cover no-repeat;
 }
 
 @media (max-width: 900px) {
@@ -411,7 +394,7 @@ header {
   height: 180px;
   border-radius: calc(var(--radius) - 4px);
   margin-bottom: 16px;
-  background: #e8eee8 url('/images/default-document.jpeg') center/cover no-repeat;
+  background-color: #e8eee8;
 }
 
 .document-section {
@@ -464,7 +447,7 @@ header {
 .news-card-image {
   height: 200px;
   width: 100%;
-  background: #eee url('/images/default-news.jpeg') center/cover no-repeat;
+  background-color: #eee;
 }
 
 .news-card-content {

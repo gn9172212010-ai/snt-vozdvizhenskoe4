@@ -6,6 +6,7 @@ import DocumentCard from '../../../components/DocumentCard.astro';
 
 import path from 'node:path';
 import { listDocuments } from '../../../utils/autoContent.js';
+import { withBase } from '../../../utils/url.js';
 
 const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
 const regulations = listDocuments(publicDocsRoot, 'regulation');
@@ -34,7 +35,7 @@ const regulations = listDocuments(publicDocsRoot, 'regulation');
                             title={item.title}
                             category="Регламент"
                             date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
-                            file={item.file}
+                            file={withBase(item.file)}
                         />
                     ))
                 )

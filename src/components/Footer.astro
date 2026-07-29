@@ -1,6 +1,7 @@
 ---
 import organization from "../data/organization.json";
 import contacts from "../data/contacts.json";
+import { withBase } from "../utils/url.js";
 
 const currentYear = new Date().getFullYear();
 
@@ -78,25 +79,25 @@ const copyright =
             </h3>
 
             <p>
-                <a href="/">
+                <a href={withBase("/")}>
                     Главная
                 </a>
             </p>
 
             <p>
-                <a href="/documents">
+                <a href={withBase("/documents")}>
                     Документы
                 </a>
             </p>
 
             <p>
-                <a href="/payments">
+                <a href={withBase("/payments")}>
                     Взносы и оплата
                 </a>
             </p>
 
             <p>
-                <a href="/contacts">
+                <a href={withBase("/contacts")}>
                     Контакты
                 </a>
             </p>

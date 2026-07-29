@@ -6,6 +6,7 @@ import Footer from '../../components/Footer.astro';
 
 import SearchBar from '../../components/SearchBar.astro';
 import DocumentSection from '../../components/DocumentSection.astro';
+import { withBase } from '../../utils/url.js';
 ---
 
 <MainLayout
@@ -25,37 +26,37 @@ import DocumentSection from '../../components/DocumentSection.astro';
             <DocumentSection
                 icon="📘"
                 title="Устав"
-                href="/documents/charter"
+                href={withBase("/documents/charter")}
             />
 
             <DocumentSection
                 icon="📋"
                 title="Протоколы собраний"
-                href="/documents/protocols"
+                href={withBase("/documents/protocols")}
             />
 
             <DocumentSection
                 icon="💰"
                 title="Сметы"
-                href="/documents/estimates"
+                href={withBase("/documents/estimates")}
             />
 
             <DocumentSection
                 icon="📊"
                 title="Отчёты ревизионной комиссии"
-                href="/documents/reports"
+                href={withBase("/documents/reports")}
             />
 
             <DocumentSection
                 icon="📜"
                 title="Регламенты"
-                href="/documents/regulations"
+                href={withBase("/documents/regulations")}
             />
 
             <DocumentSection
                 icon="📝"
                 title="Шаблоны заявлений"
-                href="/documents/applications"
+                href={withBase("/documents/applications")}
             />
         </section>
     </main>

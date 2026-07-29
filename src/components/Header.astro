@@ -1,17 +1,18 @@
 ---
 import organization from "../data/organization.json";
 import contacts from "../data/contacts.json";
+import { withBase } from "../utils/url.js";
 
 const current = Astro.url.pathname;
 
 const menu = [
-    { href: "/", label: "Главная" },
-    { href: "/news", label: "Новости" },
-    { href: "/documents", label: "Документы" },
-    { href: "/payments", label: "Взносы" },
-    { href: "/gallery", label: "Галерея" },
-    { href: "/calendar", label: "Календарь" },
-    { href: "/contacts", label: "Контакты" }
+    { href: withBase("/"), label: "Главная" },
+    { href: withBase("/news"), label: "Новости" },
+    { href: withBase("/documents"), label: "Документы" },
+    { href: withBase("/payments"), label: "Взносы" },
+    { href: withBase("/gallery"), label: "Галерея" },
+    { href: withBase("/calendar"), label: "Календарь" },
+    { href: withBase("/contacts"), label: "Контакты" }
 ];
 ---
 
@@ -21,11 +22,11 @@ const menu = [
 
         <a
             class="header-logo"
-            href="/"
+            href={withBase("/")}
             aria-label="Перейти на главную страницу">
 
             <img
-    src="/images/logo.png"
+    src={withBase("/images/logo.png")}
     alt="Логотип СНТ"
     width="90"
     height="90"

@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import organization from "../data/organization.json";
+import { withBase } from "../utils/url.js";
 
 interface Props {
   title?: string;
@@ -17,8 +18,21 @@ const pageTitle =
     ? organization.site.title
     : `${title} — ${organization.shortName}`;
 
-const site = organization.website;
 const url = Astro.url.href;
+const ogImage = new URL(withBase("/images/hero.jpeg"), Astro.site).href;
+
+// Фоновые картинки для CSS: обычный url('/images/...') в global.css не учитывает
+// base-путь GitHub Pages, поэтому передаём готовые ссылки как CSS-переменные.
+const imgHero = withBase("/images/hero.jpeg");
+const imgAbout = withBase("/images/about.jpeg");
+const imgDocuments = withBase("/images/page-documents.jpg");
+const imgPayments = withBase("/images/page-payments.jpg");
+const imgGallery = withBase("/images/page-gallery.jpg");
+const imgNews = withBase("/images/page-news.jpg");
+const imgCalendar = withBase("/images/page-calendar.jpg");
+const imgContacts = withBase("/images/page-contacts.jpg");
+const imgDefaultDocument = withBase("/images/default-document.jpeg");
+const imgDefaultNews = withBase("/images/default-news.jpeg");
 ---
 
 <!DOCTYPE html>
@@ -68,18 +82,18 @@ const url = Astro.url.href;
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="/images/favicon-32x32.png">
+    href={withBase("/images/favicon-32x32.png")}>
 
 <link
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href="/images/favicon-16x16.png">
+    href={withBase("/images/favicon-16x16.png")}>
 
 <link
     rel="apple-touch-icon"
     sizes="180x180"
-    href="/images/apple-touch-icon.png">
+    href={withBase("/images/apple-touch-icon.png")}>
 
     <link
         rel="preconnect"
@@ -94,7 +108,7 @@ const url = Astro.url.href;
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap"
         rel="stylesheet">
 
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="manifest" href={withBase("/site.webmanifest")}>
 
 
     <!-- Open Graph -->
@@ -119,11 +133,30 @@ const url = Astro.url.href;
 
     <meta
         property="og:image"
-        content={`${site}/images/hero.jpeg`}>
+        content={ogImage}>
 
     <meta
         property="og:locale"
         content="ru_RU">
+
+    <!--
+        Фоновые картинки задаются здесь, а не в global.css: сайт развёрнут
+        в подпапке (base-path), и в чистом CSS абсолютный url('/images/...')
+        не может учитывать этот префикс. Здесь мы можем — через withBase().
+    -->
+    <style set:html={`
+        .hero { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgHero}') center/cover no-repeat; }
+        .hero.hero-about { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgAbout}') center/cover no-repeat; }
+        .page-hero-about { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgAbout}') center/cover no-repeat; }
+        .page-hero-documents { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgDocuments}') center/cover no-repeat; }
+        .page-hero-payments { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgPayments}') center/cover no-repeat; }
+        .page-hero-gallery { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgGallery}') center/cover no-repeat; }
+        .page-hero-news { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgNews}') center/cover no-repeat; }
+        .page-hero-calendar { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgCalendar}') center/cover no-repeat; }
+        .page-hero-contacts { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('${imgContacts}') center/cover no-repeat; }
+        .document-card-image { background-image: url('${imgDefaultDocument}'); background-size: cover; background-position: center; }
+        .news-card-image { background-image: url('${imgDefaultNews}'); background-size: cover; background-position: center; }
+    `} />
 
 </head>
 

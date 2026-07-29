@@ -5,6 +5,7 @@ import Footer from '../../../components/Footer.astro';
 
 import path from 'node:path';
 import { listDocuments } from '../../../utils/autoContent.js';
+import { withBase } from '../../../utils/url.js';
 
 const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
 const charterFiles = listDocuments(publicDocsRoot, 'charter');
@@ -28,7 +29,7 @@ const charter = charterFiles[0];
 
                         <a
                             class="button"
-                            href={charter.file}
+                            href={withBase(charter.file)}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Открыть Устав СНТ в формате PDF">

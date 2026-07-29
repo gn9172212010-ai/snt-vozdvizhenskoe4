@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import FeeCalculator from '../../components/FeeCalculator.astro';
 import payments from '../../data/payments.json';
+import { withBase } from '../../utils/url.js';
 
 const membership = payments.membershipFee;
 const targetFees = payments.targetFees;
@@ -61,7 +62,7 @@ const bank = payments.bankDetails;
 
 <a
     class="button"
-    href="/docs/payments/Решение_ОСС_2026.pdf"
+    href={withBase("/docs/payments/Решение_ОСС_2026.pdf")}
     target="_blank"
     rel="noopener"
 >
@@ -150,7 +151,7 @@ targetFees.map((item) => (
 
 <a
     class="button"
-    href="/docs/payments/Реквизиты.pdf"
+    href={withBase("/docs/payments/Реквизиты.pdf")}
     target="_blank"
     rel="noopener"
 >
@@ -160,7 +161,7 @@ targetFees.map((item) => (
 
 <a
     class="button"
-    href="/docs/payments/Квитанция.pdf"
+    href={withBase("/docs/payments/Квитанция.pdf")}
     target="_blank"
     rel="noopener"
     style="margin-left:15px;"

@@ -1,3 +1,7 @@
+---
+import { withBase } from "../utils/url.js";
+---
+
 <section class="hero">
 
     <div class="hero-content">
@@ -6,7 +10,7 @@
 
             <img
 
-                src="/images/logo.svg"
+                src={withBase("/images/logo.svg")}
 
                 alt="Логотип СНТ «Воздвиженское»"
 
@@ -42,7 +46,7 @@
 
                 class="hero-button"
 
-                href="/news"
+                href={withBase("/news")}
 
             >
 
@@ -54,7 +58,7 @@
 
                 class="hero-button"
 
-                href="/documents"
+                href={withBase("/documents")}
 
             >
 
@@ -66,7 +70,7 @@
 
                 class="hero-button"
 
-                href="/calendar"
+                href={withBase("/calendar")}
 
             >
 
@@ -78,7 +82,7 @@
 
                 class="hero-button"
 
-                href="/contacts"
+                href={withBase("/contacts")}
 
             >
 

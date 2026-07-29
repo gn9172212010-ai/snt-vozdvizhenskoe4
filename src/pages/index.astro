@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 import organization from "../data/organization.json";
+import { withBase } from "../utils/url.js";
 ---
 
 <MainLayout
@@ -34,19 +35,19 @@ import organization from "../data/organization.json";
 
         <div class="hero-buttons">
 
-            <a class="hero-button" href="/payments">
+            <a class="hero-button" href={withBase("/payments")}>
                 💳 Оплатить взносы
             </a>
 
-            <a class="hero-button" href="/documents">
+            <a class="hero-button" href={withBase("/documents")}>
                 📄 Документы
             </a>
 
-            <a class="hero-button" href="/news">
+            <a class="hero-button" href={withBase("/news")}>
                 📰 Новости
             </a>
 
-            <a class="hero-button" href="/contacts">
+            <a class="hero-button" href={withBase("/contacts")}>
                 ☎ Контакты
             </a>
 
@@ -69,7 +70,7 @@ import organization from "../data/organization.json";
 
         </p>
 
-        <a class="button" href="/payments">
+        <a class="button" href={withBase("/payments")}>
 
             Перейти к оплате →
 
@@ -97,7 +98,7 @@ import organization from "../data/organization.json";
 
             </p>
 
-            <a class="button" href="/news">
+            <a class="button" href={withBase("/news")}>
 
                 Все новости →
 
@@ -117,32 +118,32 @@ import organization from "../data/organization.json";
 
         <div class="cards-grid">
 
-            <a class="card quick-card" href="/documents">
+            <a class="card quick-card" href={withBase("/documents")}>
                 <h3>📄 Документы</h3>
                 <p>Устав, протоколы, сметы, отчёты.</p>
             </a>
 
-            <a class="card quick-card" href="/payments">
+            <a class="card quick-card" href={withBase("/payments")}>
                 <h3>💳 Взносы</h3>
                 <p>Реквизиты и квитанции.</p>
             </a>
 
-            <a class="card quick-card" href="/gallery">
+            <a class="card quick-card" href={withBase("/gallery")}>
                 <h3>📷 Галерея</h3>
                 <p>Фотографии товарищества.</p>
             </a>
 
-            <a class="card quick-card" href="/calendar">
+            <a class="card quick-card" href={withBase("/calendar")}>
                 <h3>📅 Календарь</h3>
                 <p>Работы и мероприятия.</p>
             </a>
 
-            <a class="card quick-card" href="/contacts">
+            <a class="card quick-card" href={withBase("/contacts")}>
                 <h3>☎ Контакты</h3>
                 <p>Председатель и правление.</p>
             </a>
 
-            <a class="card quick-card" href="/about">
+            <a class="card quick-card" href={withBase("/about")}>
                 <h3>🏡 О товариществе</h3>
                 <p>История и сведения о СНТ.</p>
             </a>
