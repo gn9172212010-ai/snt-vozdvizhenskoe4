@@ -1,0 +1,96 @@
+---
+import organization from "../data/organization.json";
+import contacts from "../data/contacts.json";
+
+const current = Astro.url.pathname;
+
+const menu = [
+    { href: "/", label: "Главная" },
+    { href: "/news", label: "Новости" },
+    { href: "/documents", label: "Документы" },
+    { href: "/payments", label: "Взносы" },
+    { href: "/gallery", label: "Галерея" },
+    { href: "/calendar", label: "Календарь" },
+    { href: "/contacts", label: "Контакты" }
+];
+---
+
+<header class="site-header">
+
+    <div class="header-top">
+
+        <a
+            class="header-logo"
+            href="/"
+            aria-label="Перейти на главную страницу">
+
+            <img
+    src="/images/logo.png"
+    alt="Логотип СНТ"
+    width="90"
+    height="90"
+    loading="eager"
+    decoding="async">
+
+            <div class="header-title">
+
+                <div class="site-title">
+                    {organization.shortName}
+                </div>
+
+                <p>
+                    Официальный сайт
+                </p>
+
+                <span>
+                    Сергиево-Посадский городской округ
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="header-contacts">
+
+            <a
+                href={contacts.phone.href}
+                title="Позвонить председателю">
+
+                📞 {contacts.phone.display}
+
+            </a>
+
+
+            <a
+                href={contacts.email.href}
+                title="Написать председателю">
+
+                ✉ {contacts.email.address}
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<nav
+    class="main-nav"
+    aria-label="Главное меню">
+
+    {
+        menu.map(item => (
+            <a
+                href={item.href}
+                class={current === item.href ? "active" : undefined}
+                aria-current={current === item.href ? "page" : undefined}
+            >
+                {item.label}
+            </a>
+        ))
+    }
+
+</nav>

@@ -1,0 +1,32 @@
+---
+interface Props {
+    title: string;
+    category: string;
+    file: string;
+    date?: string;
+}
+
+const { title, category, file, date } = Astro.props;
+---
+
+<div class="card document-card">
+
+    <h2>
+        {title}
+    </h2>
+
+    <p>
+        <strong>{category}</strong>
+        {date && <> · {date}</>}
+    </p>
+
+    <a
+        class="button"
+        href={file}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Открыть «${title}» в формате PDF`}>
+        📄 Открыть PDF
+    </a>
+
+</div>

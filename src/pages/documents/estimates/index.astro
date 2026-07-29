@@ -1,0 +1,45 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import DocumentCard from '../../../components/DocumentCard.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const estimates = listDocuments(publicDocsRoot, 'estimates');
+---
+
+<MainLayout
+    title="Сметы"
+    description="Сметы СНТ «Воздвиженское» НПО «Энергия». Финансовая информация и документы товарищества.">
+
+    <Header />
+
+    <main>
+        <section class="section">
+            <h1>Сметы</h1>
+
+            {
+                estimates.length === 0 ? (
+                    <div class="card">
+                        <p>Сметы пока не опубликованы.</p>
+                    </div>
+                ) : (
+                    estimates.map(item => (
+                        <DocumentCard
+                            title={item.title}
+                            category="Смета"
+                            date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
+                            file={item.file}
+                        />
+                    ))
+                )
+            }
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

@@ -1,0 +1,78 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const images = import.meta.glob(
+    "../../assets/gallery/**/*.{jpg,jpeg,png,webp,avif}",
+    {
+        eager: true,
+        import: "default"
+    }
+);
+
+const gallery = {};
+
+for (const path in images) {
+
+    const match = path.match(/gallery\/([^/]+)\//);
+
+    if (!match) continue;
+
+    const year = match[1];
+
+    if (!gallery[year]) gallery[year] = [];
+
+    gallery[year].push(images[path]);
+
+}
+
+const years = Object.keys(gallery).sort().reverse();
+---
+
+<MainLayout title="Фотогалерея">
+
+<Header />
+
+<main>
+
+<h1>Фотогалерея</h1>
+
+{
+years.map(year => (
+
+<section class="section">
+
+<h2>{year}</h2>
+
+<div class="gallery-grid">
+
+{
+gallery[year].map(image => (
+
+<a
+href={image.src}
+target="_blank">
+
+<img
+src={image.src}
+loading="lazy"
+alt="Фото СНТ"/>
+
+</a>
+
+))
+}
+
+</div>
+
+</section>
+
+))
+}
+
+</main>
+
+<Footer />
+
+</MainLayout>

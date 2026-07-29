@@ -1,0 +1,45 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import DocumentCard from '../../../components/DocumentCard.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const applications = listDocuments(publicDocsRoot, 'applications');
+---
+
+<MainLayout
+    title="Заявления и бланки"
+    description="Заявления и бланки СНТ «Воздвиженское» НПО «Энергия».">
+
+    <Header />
+
+    <main>
+        <section class="section">
+            <h1>Заявления и бланки</h1>
+
+            {
+                applications.length === 0 ? (
+                    <div class="card">
+                        <p>Шаблоны заявлений пока не опубликованы.</p>
+                    </div>
+                ) : (
+                    applications.map(item => (
+                        <DocumentCard
+                            title={item.title}
+                            category="Заявление"
+                            date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
+                            file={item.file}
+                        />
+                    ))
+                )
+            }
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

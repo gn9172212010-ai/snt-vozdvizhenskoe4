@@ -1,0 +1,47 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import DocumentCard from '../../../components/DocumentCard.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const regulations = listDocuments(publicDocsRoot, 'regulation');
+---
+
+<MainLayout
+    title="Регламенты"
+    description="Регламенты и внутренние документы СНТ «Воздвиженское» НПО «Энергия».">
+
+    <Header />
+
+    <main>
+        <section class="section">
+            <h1>Регламенты</h1>
+
+            <p>В данном разделе размещаются внутренние положения и регламенты товарищества.</p>
+
+            {
+                regulations.length === 0 ? (
+                    <div class="card">
+                        <p>Регламенты пока не опубликованы.</p>
+                    </div>
+                ) : (
+                    regulations.map(item => (
+                        <DocumentCard
+                            title={item.title}
+                            category="Регламент"
+                            date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
+                            file={item.file}
+                        />
+                    ))
+                )
+            }
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

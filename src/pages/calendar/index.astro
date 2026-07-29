@@ -1,0 +1,71 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import EventCard from '../../components/EventCard.astro';
+
+import { getCollection } from 'astro:content';
+
+const events = await getCollection('events');
+
+const sortedEvents = events.sort(
+    (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+);
+---
+
+<MainLayout
+    title="Календарь"
+    description="Календарь работ и мероприятий СНТ «Воздвиженское» НПО «Энергия».">
+
+<Header />
+
+<main>
+
+<section class="page-hero page-hero-calendar">
+
+<h1>
+    Календарь мероприятий
+</h1>
+
+</section>
+
+<section class="section">
+
+
+{
+sortedEvents.length === 0 ? (
+
+<div class="card">
+
+<p>
+    Запланированных мероприятий нет.
+</p>
+
+</div>
+
+) : (
+
+sortedEvents.map(event => (
+
+<EventCard
+
+    date={event.data.date.toLocaleDateString('ru-RU')}
+
+    title={event.data.title}
+
+/>
+
+))
+
+)
+}
+
+
+</section>
+
+</main>
+
+<Footer />
+
+</MainLayout>

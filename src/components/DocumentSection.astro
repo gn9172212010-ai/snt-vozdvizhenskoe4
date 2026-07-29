@@ -1,0 +1,39 @@
+---
+interface Props {
+
+    title: string;
+
+    icon: string;
+
+    href: string;
+
+}
+
+const {
+
+    title,
+
+    icon,
+
+    href
+
+} = Astro.props;
+---
+
+<a
+
+    class="document-section"
+
+    href={href}
+
+    aria-label={`Открыть раздел: ${title}`}
+
+>
+
+    <h2>
+
+        {icon} {title}
+
+    </h2>
+
+</a>

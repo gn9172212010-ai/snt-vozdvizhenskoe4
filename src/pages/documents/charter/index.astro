@@ -1,0 +1,49 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const charterFiles = listDocuments(publicDocsRoot, 'charter');
+const charter = charterFiles[0];
+---
+
+<MainLayout
+    title="Устав"
+    description="Устав СНТ «Воздвиженское» НПО «Энергия» в формате PDF.">
+
+    <Header />
+
+    <main>
+        <section class="section">
+            <h1>Устав СНТ</h1>
+
+            {
+                charter ? (
+                    <div class="card">
+                        <p>Официальный документ товарищества.</p>
+
+                        <a
+                            class="button"
+                            href={charter.file}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Открыть Устав СНТ в формате PDF">
+                            📘 Открыть PDF
+                        </a>
+                    </div>
+                ) : (
+                    <div class="card">
+                        <p>Устав пока не опубликован.</p>
+                    </div>
+                )
+            }
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

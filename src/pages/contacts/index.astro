@@ -1,0 +1,140 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+import organization from '../../data/organization.json';
+import contacts from '../../data/contacts.json';
+---
+
+<MainLayout
+    title="Контакты"
+    description="Контактная информация СНТ «Воздвиженское» НПО «Энергия». Председатель правления, телефон, электронная почта и адрес товарищества.">
+
+<Header />
+
+<main>
+
+<section class="page-hero page-hero-contacts">
+
+<h1>
+    Контакты
+</h1>
+
+</section>
+
+<section class="section">
+
+
+<div class="card">
+
+<h2>
+    Председатель правления
+</h2>
+
+<p>
+
+<strong>
+    {contacts.chairman.name}
+</strong>
+
+<br>
+
+{contacts.chairman.position}
+
+</p>
+
+
+<p>
+
+<strong>
+    Телефон:
+</strong>
+
+<br>
+
+<a href={contacts.phone.href}>
+
+    {contacts.phone.display}
+
+</a>
+
+</p>
+
+
+<p>
+
+<strong>
+    E-mail:
+</strong>
+
+<br>
+
+<a href={contacts.email.href}>
+
+    {contacts.email.address}
+
+</a>
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Адрес товарищества
+</h2>
+
+<p>
+    {organization.address.legal}
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Время связи
+</h2>
+
+<p>
+
+<strong>
+    Работа с обращениями:
+</strong>
+
+<br>
+
+{contacts.workingHours.office}
+
+</p>
+
+
+<p>
+
+<strong>
+    Телефон:
+</strong>
+
+<br>
+
+{contacts.workingHours.phone}
+
+</p>
+
+</div>
+
+
+</section>
+
+</main>
+
+<Footer />
+
+</MainLayout>

@@ -1,0 +1,82 @@
+backend:
+  name: github
+  repo: USERNAME/snt-vozdvizhenskoe-v3
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+locale: ru
+
+collections:
+
+  - name: news
+    label: Новости
+
+    folder: src/content/news
+
+    create: true
+
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
+    fields:
+
+      - { label: Заголовок, name: title, widget: string }
+
+      - { label: Дата, name: date, widget: datetime }
+
+      - { label: Краткое описание, name: description, widget: text }
+
+      - { label: Текст новости, name: body, widget: markdown }
+
+
+
+  - name: events
+
+    label: Мероприятия
+
+    folder: src/content/events
+
+    create: true
+
+    fields:
+
+      - { label: Событие, name: title, widget: string }
+
+      - { label: Дата, name: date, widget: datetime }
+
+      - { label: Описание, name: body, widget: markdown }
+
+  - name: contacts
+
+    label: Контакты
+
+    files:
+
+      - label: Контакты СНТ
+
+        name: contacts
+
+        file: src/data/contacts.json
+
+        fields:
+
+          - { label: Председатель, name: chairman, widget: string }
+
+          - { label: Телефон, name: phone, widget: string }
+
+          - { label: Email, name: email, widget: string }
+
+  - name: gallery
+
+    label: Фотографии
+
+    folder: public/uploads/photos
+
+    create: true
+
+    fields:
+
+      - { label: Название, name: title, widget: string }
+
+      - { label: Фото, name: image, widget: image }

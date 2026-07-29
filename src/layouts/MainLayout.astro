@@ -1,0 +1,136 @@
+---
+import "../styles/global.css";
+import organization from "../data/organization.json";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = organization.site.title,
+  description = organization.site.description
+} = Astro.props;
+
+const pageTitle =
+  title === organization.site.title
+    ? organization.site.title
+    : `${title} — ${organization.shortName}`;
+
+const site = organization.website;
+const url = Astro.url.href;
+---
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <title>{pageTitle}</title>
+
+    <meta
+        name="description"
+        content={description}>
+
+    <meta
+        name="keywords"
+        content={organization.site.keywords.join(", ")}>
+
+    <meta
+        name="author"
+        content={organization.shortName}>
+
+    <meta
+        name="robots"
+        content="index,follow">
+
+    <meta
+        name="theme-color"
+        content="#2F6B2F">
+
+    <meta
+        name="format-detection"
+        content="telephone=no">
+
+    <link
+        rel="canonical"
+        href={url}>
+
+   <!-- Favicon -->
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/images/favicon-32x32.png">
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/images/favicon-16x16.png">
+
+<link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/images/apple-touch-icon.png">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="manifest" href="/site.webmanifest">
+
+
+    <!-- Open Graph -->
+
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:site_name"
+        content={organization.shortName}>
+
+    <meta
+        property="og:title"
+        content={pageTitle}>
+
+    <meta
+        property="og:description"
+        content={description}>
+
+    <meta
+        property="og:url"
+        content={url}>
+
+    <meta
+        property="og:image"
+        content={`${site}/images/hero.jpeg`}>
+
+    <meta
+        property="og:locale"
+        content="ru_RU">
+
+</head>
+
+<body>
+
+    <slot />
+
+</body>
+
+</html>

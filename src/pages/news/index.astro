@@ -1,0 +1,85 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import path from "node:path";
+import { listNews } from "../../utils/autoContent.js";
+
+const newsDir = path.join(process.cwd(), "src", "content", "news");
+const news = listNews(newsDir);
+---
+
+<MainLayout
+    title="Новости"
+    description="Новости СНТ «Воздвиженское» НПО «Энергия». Решения правления, объявления, информация о собраниях и важных событиях.">
+
+<Header />
+
+<main>
+
+<section class="page-hero page-hero-news">
+
+    <h1>
+        Новости
+    </h1>
+
+</section>
+
+<section class="section">
+
+    {
+        news.length === 0 ? (
+
+            <div class="card">
+
+                <p>
+                    На данный момент опубликованных новостей нет.
+                </p>
+
+            </div>
+
+        ) : (
+
+            news.map((item) => (
+
+                <article class="card">
+
+                    <h2>
+                        {item.title}
+                    </h2>
+
+                    <p class="news-date">
+
+                        {item.date.toLocaleDateString("ru-RU")}
+
+                    </p>
+
+                    <p>
+
+                        {item.description}
+
+                    </p>
+
+                    <a
+                        class="button"
+                        href="/news">
+
+                        Все новости →
+
+                    </a>
+
+                </article>
+
+            ))
+
+        )
+    }
+
+</section>
+
+</main>
+
+<Footer />
+
+</MainLayout>

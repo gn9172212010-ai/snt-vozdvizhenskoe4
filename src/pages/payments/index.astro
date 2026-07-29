@@ -1,0 +1,211 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FeeCalculator from '../../components/FeeCalculator.astro';
+import payments from '../../data/payments.json';
+
+const membership = payments.membershipFee;
+const targetFees = payments.targetFees;
+const bank = payments.bankDetails;
+---
+
+<MainLayout
+    title="Взносы"
+    description="Информация о членских и целевых взносах СНТ «Воздвиженское» НПО «Энергия», реквизиты для оплаты и документы.">
+
+<Header />
+
+<main>
+
+<section class="page-hero page-hero-payments">
+
+<h1>
+    Взносы и реквизиты
+</h1>
+
+</section>
+
+<section class="section">
+
+
+<FeeCalculator />
+
+
+<div class="card">
+
+<h2>
+    Членские взносы
+</h2>
+
+<p>
+    Размер:
+    <strong>
+        {membership.amount} {membership.unit}
+    </strong>
+</p>
+
+<p>
+    Период оплаты:
+    <strong>
+        {membership.paymentPeriod}
+    </strong>
+</p>
+
+<p>
+    Основание:
+    <strong>
+        {membership.protocol}
+    </strong>
+</p>
+
+<a
+    class="button"
+    href="/docs/payments/Решение_ОСС_2026.pdf"
+    target="_blank"
+    rel="noopener"
+>
+    📄 Открыть решение ОСС
+</a>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Целевые взносы
+</h2>
+
+{
+
+targetFees.map((item) => (
+
+<div class="target-fee">
+
+<p>
+<strong>
+    {item.name}
+</strong>
+</p>
+
+<p>
+    Размер:
+    {item.amount.toLocaleString('ru-RU')} руб.
+</p>
+
+<p>
+    Срок оплаты:
+    {item.dueDate}
+</p>
+
+<hr />
+
+</div>
+
+))
+
+}
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Реквизиты для оплаты
+</h2>
+
+
+<p>
+    Получатель: {bank.receiver}
+</p>
+
+<p>
+    ИНН: {bank.inn}
+</p>
+
+<p>
+    КПП: {bank.kpp}
+</p>
+
+<p>
+    Расчетный счет: {bank.account}
+</p>
+
+<p>
+    Банк: {bank.bank}
+</p>
+
+<p>
+    БИК: {bank.bik}
+</p>
+
+<p>
+    Корреспондентский счет: {bank.correspondentAccount}
+</p>
+
+
+<a
+    class="button"
+    href="/docs/payments/Реквизиты.pdf"
+    target="_blank"
+    rel="noopener"
+>
+    📄 Скачать реквизиты PDF
+</a>
+
+
+<a
+    class="button"
+    href="/docs/payments/Квитанция.pdf"
+    target="_blank"
+    rel="noopener"
+    style="margin-left:15px;"
+>
+    🖨 Скачать квитанцию
+</a>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Разъяснения
+</h2>
+
+<ul>
+
+<li>
+    Членские взносы уплачиваются ежегодно.
+</li>
+
+<li>
+    Целевые взносы оплачиваются согласно решениям общего собрания садоводов.
+</li>
+
+<li>
+    При оплате обязательно указывайте номер участка.
+</li>
+
+<li>
+    Рекомендуется сохранять платежные документы до окончания расчетного периода.
+</li>
+
+</ul>
+
+</div>
+
+
+</section>
+
+</main>
+
+<Footer />
+
+</MainLayout>

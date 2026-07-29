@@ -1,0 +1,47 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import DocumentCard from '../../../components/DocumentCard.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const reports = listDocuments(publicDocsRoot, 'reports');
+---
+
+<MainLayout
+    title="Отчёты ревизионной комиссии"
+    description="Отчёты ревизионной комиссии СНТ «Воздвиженское» НПО «Энергия».">
+
+    <Header />
+
+    <main>
+        <section class="section">
+            <h1>Отчёты ревизионной комиссии</h1>
+
+            <p>В данном разделе размещаются отчёты ревизионной комиссии СНТ.</p>
+
+            {
+                reports.length === 0 ? (
+                    <div class="card">
+                        <p>Отчёты ревизионной комиссии пока не опубликованы.</p>
+                    </div>
+                ) : (
+                    reports.map(item => (
+                        <DocumentCard
+                            title={item.title}
+                            category="Отчёт"
+                            date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
+                            file={item.file}
+                        />
+                    ))
+                )
+            }
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

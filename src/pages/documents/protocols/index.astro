@@ -1,0 +1,44 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import DocumentCard from '../../../components/DocumentCard.astro';
+
+import path from 'node:path';
+import { listDocuments } from '../../../utils/autoContent.js';
+
+const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
+const protocols = listDocuments(publicDocsRoot, 'protocols');
+---
+
+<MainLayout
+  title="Протоколы собраний"
+  description="Протоколы общих собраний и заседаний правления СНТ «Воздвиженское»."
+>
+  <Header />
+
+  <main>
+    <section class="section">
+      <h1>Протоколы собраний</h1>
+
+      {
+        protocols.length === 0 ? (
+          <div class="card">
+            <p>Протоколы пока не опубликованы.</p>
+          </div>
+        ) : (
+          protocols.map(item => (
+            <DocumentCard
+              title={item.title}
+              category="Протокол"
+              date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
+              file={item.file}
+            />
+          ))
+        )
+      }
+    </section>
+  </main>
+
+  <Footer />
+</MainLayout>

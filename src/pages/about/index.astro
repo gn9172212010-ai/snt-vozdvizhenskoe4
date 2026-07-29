@@ -1,0 +1,151 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import organization from "../../data/organization.json";
+---
+
+<MainLayout
+    title="О товариществе"
+    description="Информация о СНТ «Воздвиженское» НПО «Энергия». Общие сведения, реквизиты и структура управления.">
+
+<Header />
+
+<main>
+
+<section class="page-hero page-hero-about">
+
+<h1>
+    О товариществе
+</h1>
+
+</section>
+
+<section class="section">
+
+<div class="card">
+
+<h2>
+    Общие сведения
+</h2>
+
+<p>
+
+<strong>
+    Полное наименование:
+</strong>
+
+<br>
+
+{organization.fullName}
+
+</p>
+
+
+<p>
+
+<strong>
+    Сокращенное наименование:
+</strong>
+
+<br>
+
+{organization.shortName}
+
+</p>
+
+
+<p>
+
+<strong>
+    Юридический адрес:
+</strong>
+
+<br>
+
+{organization.address.legal}
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Председатель правления
+</h2>
+
+<p>
+
+<strong>
+    {organization.chairman.name}
+</strong>
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Сведения о товариществе
+</h2>
+
+<ul>
+
+<li>
+    Организационно-правовая форма: садоводческое некоммерческое товарищество.
+</li>
+
+<li>
+    Товарищество создано для управления общим имуществом и организации эксплуатации территории СНТ.
+</li>
+
+<li>
+    Решения принимаются общим собранием членов СНТ в соответствии с действующим законодательством.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+    Структура управления
+</h2>
+
+<ul>
+
+<li>
+    Председатель правления
+</li>
+
+<li>
+    Правление СНТ
+</li>
+
+<li>
+    Ревизионная комиссия
+</li>
+
+</ul>
+
+</div>
+
+
+</section>
+
+</main>
+
+<Footer />
+
+</MainLayout>

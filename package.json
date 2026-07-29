@@ -1,0 +1,16 @@
+{
+  "name": "snt-vozdvizhenskoe",
+  "version": "3.0.0",
+  "description": "Официальный сайт СНТ «Воздвиженское» НПО «Энергия»",
+  "author": "СНТ «Воздвиженское» НПО «Энергия»",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
+  }
+}

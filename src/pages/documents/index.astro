@@ -1,0 +1,65 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+import SearchBar from '../../components/SearchBar.astro';
+import DocumentSection from '../../components/DocumentSection.astro';
+---
+
+<MainLayout
+    title="Документы"
+    description="Документы СНТ «Воздвиженское» НПО «Энергия»: устав, протоколы собраний, сметы, отчёты, регламенты и заявления.">
+
+    <Header />
+
+    <main>
+        <section class="page-hero page-hero-documents">
+            <h1>Документы СНТ</h1>
+        </section>
+
+        <SearchBar />
+
+        <section class="section">
+            <DocumentSection
+                icon="📘"
+                title="Устав"
+                href="/documents/charter"
+            />
+
+            <DocumentSection
+                icon="📋"
+                title="Протоколы собраний"
+                href="/documents/protocols"
+            />
+
+            <DocumentSection
+                icon="💰"
+                title="Сметы"
+                href="/documents/estimates"
+            />
+
+            <DocumentSection
+                icon="📊"
+                title="Отчёты ревизионной комиссии"
+                href="/documents/reports"
+            />
+
+            <DocumentSection
+                icon="📜"
+                title="Регламенты"
+                href="/documents/regulations"
+            />
+
+            <DocumentSection
+                icon="📝"
+                title="Шаблоны заявлений"
+                href="/documents/applications"
+            />
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>
