@@ -1,0 +1,59 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import path from "node:path";
+import { listNews, renderPlainTextToHtml } from "../../utils/autoContent.js";
+import { withBase } from "../../utils/url.js";
+
+export function getStaticPaths() {
+    const newsDir = path.join(process.cwd(), "src", "content", "news");
+    const news = listNews(newsDir);
+
+    return news.map((item) => ({
+        params: { slug: item.slug },
+        props: { item }
+    }));
+}
+
+const { item } = Astro.props;
+const bodyHtml = renderPlainTextToHtml(item.body, withBase);
+---
+
+<MainLayout
+    title={item.title}
+    description={item.description}>
+
+    <Header />
+
+    <main>
+        <section class="section">
+
+            <a
+                class="back-button"
+                href={withBase("/news")}
+                style="display: inline-flex; margin-bottom: 20px;">
+                ← Все новости
+            </a>
+
+            <article class="card">
+
+                <h1>
+                    {item.title}
+                </h1>
+
+                <p class="news-date">
+                    {item.date.toLocaleDateString("ru-RU")}
+                </p>
+
+                <div class="news-body" set:html={bodyHtml} />
+
+            </article>
+
+        </section>
+    </main>
+
+    <Footer />
+
+</MainLayout>

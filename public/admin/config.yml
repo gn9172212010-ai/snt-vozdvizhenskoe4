@@ -1,7 +1,10 @@
 backend:
   name: github
-  repo: USERNAME/snt-vozdvizhenskoe-v3
+  repo: gn9172212010-ai/snt-vozdvizhenskoe4
   branch: main
+  # После деплоя воркера (см. cloudflare-oauth-worker/README.md) заменить
+  # на свой реальный адрес, БЕЗ /callback на конце:
+  base_url: https://ЗАМЕНИ-НА-СВОЙ-АДРЕС.workers.dev
 
 media_folder: public/uploads
 public_folder: /uploads
@@ -66,6 +69,28 @@ collections:
           - { label: Телефон, name: phone, widget: string }
 
           - { label: Email, name: email, widget: string }
+
+  - name: announcement
+
+    label: Важная информация (главная страница)
+
+    files:
+
+      - label: Баннер важной информации
+
+        name: announcement
+
+        file: src/data/announcement.json
+
+        fields:
+
+          - { label: Показывать баннер, name: enabled, widget: boolean, default: true }
+
+          - { label: Текст объявления, name: text, widget: text }
+
+          - { label: Ссылка кнопки (например /payments), name: linkHref, widget: string }
+
+          - { label: Текст кнопки, name: linkLabel, widget: string }
 
   - name: gallery
 

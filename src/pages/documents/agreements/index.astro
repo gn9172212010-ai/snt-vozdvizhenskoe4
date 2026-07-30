@@ -9,31 +9,29 @@ import { listDocuments } from '../../../utils/autoContent.js';
 import { withBase } from '../../../utils/url.js';
 
 const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
-const regulations = listDocuments(publicDocsRoot, 'regulations');
+const agreements = listDocuments(publicDocsRoot, 'agreements');
 ---
 
 <MainLayout
-    title="Правила и регламенты СНТ"
-    description="Регламенты и внутренние документы СНТ «Воздвиженское» НПО «Энергия».">
+    title="Договора"
+    description="Договора СНТ «Воздвиженское» НПО «Энергия» с подрядчиками и организациями.">
 
     <Header />
 
     <main>
         <section class="section">
-            <h1>Правила и регламенты СНТ</h1>
-
-            <p>В данном разделе размещаются внутренние положения и регламенты товарищества.</p>
+            <h1>Договора</h1>
 
             {
-                regulations.length === 0 ? (
+                agreements.length === 0 ? (
                     <div class="card">
-                        <p>Регламенты пока не опубликованы.</p>
+                        <p>Договора пока не опубликованы.</p>
                     </div>
                 ) : (
-                    regulations.map(item => (
+                    agreements.map(item => (
                         <DocumentCard
                             title={item.title}
-                            category="Регламент"
+                            category="Договор"
                             date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
                             file={withBase(item.file)}
                         />

@@ -11,7 +11,7 @@ import { withBase } from '../../utils/url.js';
 
 <MainLayout
     title="Документы"
-    description="Документы СНТ «Воздвиженское» НПО «Энергия»: устав, протоколы собраний, сметы, отчёты, регламенты и заявления.">
+    description="Документы СНТ «Воздвиженское» НПО «Энергия»: устав, договора, протоколы собраний собственников, сметы, отчёты ревизионной комиссии, правила и регламенты, схемы СНТ, шаблоны заявлений.">
 
     <Header />
 
@@ -30,8 +30,14 @@ import { withBase } from '../../utils/url.js';
             />
 
             <DocumentSection
+                icon="🤝"
+                title="Договора"
+                href={withBase("/documents/agreements")}
+            />
+
+            <DocumentSection
                 icon="📋"
-                title="Протоколы собраний"
+                title="Протоколы собраний собственников"
                 href={withBase("/documents/protocols")}
             />
 
@@ -49,14 +55,20 @@ import { withBase } from '../../utils/url.js';
 
             <DocumentSection
                 icon="📜"
-                title="Регламенты"
+                title="Правила и регламенты СНТ"
                 href={withBase("/documents/regulations")}
+            />
+
+            <DocumentSection
+                icon="🗺️"
+                title="Схемы СНТ"
+                href={withBase("/documents/scheme")}
             />
 
             <DocumentSection
                 icon="📝"
                 title="Шаблоны заявлений"
-                href={withBase("/documents/applications")}
+                href={withBase("/documents/templates")}
             />
         </section>
     </main>

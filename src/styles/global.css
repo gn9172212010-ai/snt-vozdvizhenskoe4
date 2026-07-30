@@ -239,6 +239,35 @@ header {
   color: #fff;
 }
 
+.back-button-wrap {
+  display: flex;
+  justify-content: flex-start;
+  max-width: var(--content-width);
+  margin: 14px auto 0;
+  padding: 0 20px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.back-button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
 /* ==========================================================
    HERO
 ========================================================== */
@@ -275,6 +304,7 @@ header {
   color: white;
   font-size: 58px;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+  overflow-wrap: break-word;
 }
 
 .hero h2 {
@@ -364,6 +394,16 @@ header {
    CARDS & DOCUMENTS
 ========================================================== */
 
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.quick-card {
+  display: block;
+}
+
 .card,
 .document-card,
 .gallery-card,
@@ -450,6 +490,30 @@ header {
   background-color: #eee;
 }
 
+.news-date {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.news-body p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.news-body p:last-child {
+  margin-bottom: 0;
+}
+
+.news-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 8px 0;
+  display: block;
+}
+
 .news-card-content {
   padding: 24px;
   display: flex;
@@ -496,6 +560,61 @@ header {
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.suggest-news-form {
+  margin-bottom: 25px;
+}
+
+.suggest-news-form h2 {
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface);
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-status {
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.form-status-success {
+  color: var(--primary-dark);
+}
+
+.form-status-error {
+  color: #b00020;
 }
 
 /* ==========================================================
@@ -687,6 +806,10 @@ footer {
     padding: 0 16px;
   }
 
+  .back-button-wrap {
+    padding: 0 16px;
+  }
+
   .header-top {
     flex-direction: column;
     align-items: center;
@@ -741,6 +864,14 @@ footer {
 
   .hero {
     padding: 36px 20px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero h2 {
+    font-size: 18px;
   }
 
   .hero-subtitle {

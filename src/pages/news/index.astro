@@ -6,6 +6,7 @@ import Footer from "../../components/Footer.astro";
 import path from "node:path";
 import { listNews } from "../../utils/autoContent.js";
 import { withBase } from "../../utils/url.js";
+import SuggestNewsForm from "../../components/SuggestNewsForm.astro";
 
 const newsDir = path.join(process.cwd(), "src", "content", "news");
 const news = listNews(newsDir);
@@ -28,6 +29,8 @@ const news = listNews(newsDir);
 </section>
 
 <section class="section">
+
+    <SuggestNewsForm />
 
     {
         news.length === 0 ? (
@@ -64,9 +67,9 @@ const news = listNews(newsDir);
 
                     <a
                         class="button"
-                        href={withBase("/news")}>
+                        href={withBase(`/news/${item.slug}`)}>
 
-                        Все новости →
+                        Подробнее →
 
                     </a>
 

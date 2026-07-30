@@ -65,6 +65,64 @@ export function parseFrontmatter(raw) {
     return { data: {}, body: text.trim() };
 }
 
+const TRANSLIT_MAP = {
+    а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "e", ж: "zh",
+    з: "z", и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o",
+    п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "h", ц: "ts",
+    ч: "ch", ш: "sh", щ: "sch", ъ: "", ы: "y", ь: "", э: "e", ю: "yu", я: "ya"
+};
+
+/** Кириллица/что угодно -> чистый URL-слаг латиницей: "Отключение воды.md" -> "otklyuchenie-vody" */
+export function slugify(input) {
+    const base = input.replace(/\.[^.]+$/, "").toLowerCase();
+    const translit = base
+        .split("")
+        .map((ch) => (ch in TRANSLIT_MAP ? TRANSLIT_MAP[ch] : ch))
+        .join("");
+    return (
+        translit
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .replace(/-{2,}/g, "-") || "post"
+    );
+}
+
+/**
+ * Простой рендер обычного текста в HTML-абзацы (без markdown-библиотек):
+ * экранирует спецсимволы, пустая строка = новый абзац, одиночный перенос = <br>.
+ * Понимает только один markdown-элемент — картинку: ![подпись](/uploads/news/photo.jpg)
+ *
+ * resolveSrc(src) — необязательная функция для преобразования пути к картинке
+ * (например withBase из url.js, чтобы учесть base-путь GitHub Pages).
+ */
+export function renderPlainTextToHtml(body, resolveSrc = (src) => src) {
+    const escape = (s) =>
+        s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+    const IMAGE_RE = /!\[([^\]]*)\]\(([^)]+)\)/g;
+
+    const renderImages = (escaped) =>
+        escaped.replace(IMAGE_RE, (_match, alt, src) => {
+            const resolvedSrc = src.startsWith("/") ? resolveSrc(src) : src;
+            return `<img src="${resolvedSrc}" alt="${alt}" loading="lazy">`;
+        });
+
+    return body
+        .split(/\r?\n\s*\r?\n/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .map((paragraph) => {
+            const escaped = escape(paragraph);
+            const withImages = renderImages(escaped);
+            const withBreaks = withImages.replace(/\r?\n/g, "<br>");
+            return `<p>${withBreaks}</p>`;
+        })
+        .join("\n");
+}
+
 /**
  * Список документов из public/docs/<category>/*.pdf (и .doc/.docx).
  * Ничего кроме самого файла не требуется.
@@ -98,6 +156,8 @@ export function listDocuments(publicDocsRoot, category) {
 export function listNews(newsDir) {
     if (!fs.existsSync(newsDir)) return [];
 
+    const usedSlugs = new Map();
+
     return fs
         .readdirSync(newsDir)
         .filter((f) => /\.(md|txt)$/i.test(f))
@@ -115,7 +175,12 @@ export function listNews(newsDir) {
                 data.description ||
                 firstParagraph.replace(/\r?\n/g, " ").trim().slice(0, 300);
 
-            return { title, date, description, body, filename };
+            let slug = slugify(data.title || filename);
+            const seenCount = usedSlugs.get(slug) || 0;
+            usedSlugs.set(slug, seenCount + 1);
+            if (seenCount > 0) slug = `${slug}-${seenCount + 1}`;
+
+            return { title, date, description, body, filename, slug };
         })
         .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 }

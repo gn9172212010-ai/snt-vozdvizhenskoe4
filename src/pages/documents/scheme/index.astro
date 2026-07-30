@@ -9,29 +9,29 @@ import { listDocuments } from '../../../utils/autoContent.js';
 import { withBase } from '../../../utils/url.js';
 
 const publicDocsRoot = path.join(process.cwd(), 'public', 'docs');
-const applications = listDocuments(publicDocsRoot, 'applications');
+const schemes = listDocuments(publicDocsRoot, 'scheme');
 ---
 
 <MainLayout
-    title="Заявления и бланки"
-    description="Заявления и бланки СНТ «Воздвиженское» НПО «Энергия».">
+    title="Схемы СНТ"
+    description="Схемы СНТ «Воздвиженское» НПО «Энергия»: генплан, инженерные сети.">
 
     <Header />
 
     <main>
         <section class="section">
-            <h1>Заявления и бланки</h1>
+            <h1>Схемы СНТ</h1>
 
             {
-                applications.length === 0 ? (
+                schemes.length === 0 ? (
                     <div class="card">
-                        <p>Шаблоны заявлений пока не опубликованы.</p>
+                        <p>Схемы пока не опубликованы.</p>
                     </div>
                 ) : (
-                    applications.map(item => (
+                    schemes.map(item => (
                         <DocumentCard
                             title={item.title}
-                            category="Заявление"
+                            category="Схема"
                             date={item.date ? item.date.toLocaleDateString('ru-RU') : undefined}
                             file={withBase(item.file)}
                         />
